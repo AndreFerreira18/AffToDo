@@ -1,4 +1,4 @@
-package com.afferreira.dev.ToDoApp
+package com.afferreira.dev.todoapp
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

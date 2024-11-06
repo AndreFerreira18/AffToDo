@@ -1,4 +1,4 @@
-package com.afferreira.dev.ToDoApp
+package com.afferreira.dev.todoapp
 
 import org.junit.Test
 
