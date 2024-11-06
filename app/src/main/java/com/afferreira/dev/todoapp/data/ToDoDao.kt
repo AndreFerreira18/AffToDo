@@ -16,6 +16,7 @@ interface ToDoDao {
     fun getAllData(): LiveData<List<ToDoData>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
+    // Ignore if it already exists
     suspend fun insertData(toDoData: ToDoData)
 
     @Update
