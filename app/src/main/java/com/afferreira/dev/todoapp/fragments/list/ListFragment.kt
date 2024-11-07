@@ -25,8 +25,9 @@ import com.afferreira.dev.todoapp.data.viewmodel.ToDoViewModel
 import com.afferreira.dev.todoapp.databinding.FragmentListBinding
 import com.afferreira.dev.todoapp.fragments.SharedViewModel
 import com.afferreira.dev.todoapp.fragments.list.adapter.ListAdapter
+import com.afferreira.dev.todoapp.utils.hideKeyboard
+import com.afferreira.dev.todoapp.utils.observeOnce
 import com.google.android.material.snackbar.Snackbar
-import jp.wasabeef.recyclerview.animators.LandingAnimator
 
 
 class ListFragment : Fragment(), SearchView.OnQueryTextListener {
@@ -54,6 +55,9 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
             adapter.setData(data)
             binding.recyclerView.scheduleLayoutAnimation()
         }
+
+        // Hide soft input
+        hideKeyboard(requireActivity())
 
         return binding.root
     }
@@ -96,9 +100,9 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
         val recyclerView = binding.recyclerView
         recyclerView.adapter = adapter
         recyclerView.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL) //LinearLayoutManager(requireContext())
-        recyclerView.itemAnimator = LandingAnimator().apply {
+        /*recyclerView.itemAnimator = LandingAnimator().apply {
             addDuration = 300
-        }
+        }*/
 
         // Swipe to Delete
         swipeToDelete(recyclerView)
@@ -147,8 +151,8 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
     private fun searchThroughDatabase(query: String) {
         val searchQuery = "%$query%"
 
-        mToDoViewModel.searchDatabase(searchQuery).observe(viewLifecycleOwner) { list ->
-            list?.let {
+        mToDoViewModel.searchDatabase(searchQuery).observeOnce(viewLifecycleOwner) { list ->
+            list.let {
                 Log.d("ListFragment", "searchThroughDatabase")
                 adapter.setData(it)
             }
