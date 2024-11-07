@@ -22,14 +22,15 @@ import com.afferreira.dev.todoapp.fragments.SharedViewModel
 
 class AddFragment : Fragment() {
 
-    private var _binding: FragmentAddBinding? = null
     private val mToDoViewModel: ToDoViewModel by viewModels()
     private val mSharedViewModel: SharedViewModel by viewModels()
 
+    private var _binding: FragmentAddBinding? = null
+    private val binding get() = _binding!!
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         // Inflate the layout for this fragment
-        val binding = FragmentAddBinding.inflate(inflater, container, false)
-        this._binding = binding
+        _binding = FragmentAddBinding.inflate(inflater, container, false)
         binding.prioritiesSpinner.onItemSelectedListener = mSharedViewModel.listener
         return binding.root
     }
@@ -54,7 +55,7 @@ class AddFragment : Fragment() {
     }
 
     private fun insertDataToDb() {
-        _binding?.apply {
+        binding.apply {
             val title = titleEditText.text.toString()
             val priority = prioritiesSpinner.selectedItem.toString()
             val description = descriptionEditText.text.toString()
@@ -82,7 +83,4 @@ class AddFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-
-
-
 }

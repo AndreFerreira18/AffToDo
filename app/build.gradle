@@ -72,15 +72,4 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.9.20"
     api "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesCoreVersion"
     api "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
-
-    // DataBinding
-    kapt "com.android.databinding:compiler:$databindingCompilerVersion"
-    kapt "androidx.databinding:databinding-common:$databindingVersion"
-
-    // Recyclerview Animation
-    implementation "jp.wasabeef:recyclerview-animators:$recyclerviewAnimatorsVersion"
-
-
-
-
 }

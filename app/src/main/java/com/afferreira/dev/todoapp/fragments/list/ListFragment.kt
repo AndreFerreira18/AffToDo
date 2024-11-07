@@ -100,9 +100,6 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
         val recyclerView = binding.recyclerView
         recyclerView.adapter = adapter
         recyclerView.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL) //LinearLayoutManager(requireContext())
-        /*recyclerView.itemAnimator = LandingAnimator().apply {
-            addDuration = 300
-        }*/
 
         // Swipe to Delete
         swipeToDelete(recyclerView)
