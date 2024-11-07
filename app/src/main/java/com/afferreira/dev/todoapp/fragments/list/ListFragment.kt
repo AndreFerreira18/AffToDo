@@ -67,7 +67,7 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
             }
 
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-                when(menuItem.itemId) {
+                when (menuItem.itemId) {
                     R.id.menu_deleteAll -> confirmRemoval()
                     R.id.menu_priority_high ->
                         mToDoViewModel.sortByHighPriority.observe(viewLifecycleOwner) {
@@ -94,20 +94,20 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
 //        swipeToDelete(recyclerView)
     }
 
-   /* private fun swipeToDelete(recyclerView: RecyclerView) {
-        val swipeToDeleteCallback = object : SwipeToDelete() {
-            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                val deletedItem = adapter.dataList[viewHolder.adapterPosition]
-                // Delete Item
-                mToDoViewModel.deleteItem(deletedItem)
-                adapter.notifyItemRemoved(viewHolder.adapterPosition)
-                // Restore Deleted Item
-                restoreDeletedData(viewHolder.itemView, deletedItem)
-            }
-        }
-        val itemTouchHelper = ItemTouchHelper(swipeToDeleteCallback)
-        itemTouchHelper.attachToRecyclerView(recyclerView)
-    }*/
+    /* private fun swipeToDelete(recyclerView: RecyclerView) {
+         val swipeToDeleteCallback = object : SwipeToDelete() {
+             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                 val deletedItem = adapter.dataList[viewHolder.adapterPosition]
+                 // Delete Item
+                 mToDoViewModel.deleteItem(deletedItem)
+                 adapter.notifyItemRemoved(viewHolder.adapterPosition)
+                 // Restore Deleted Item
+                 restoreDeletedData(viewHolder.itemView, deletedItem)
+             }
+         }
+         val itemTouchHelper = ItemTouchHelper(swipeToDeleteCallback)
+         itemTouchHelper.attachToRecyclerView(recyclerView)
+     }*/
 
     /*private fun restoreDeletedData(view: View, deletedItem: ToDoData) {
         val snackBar = Snackbar.make(
@@ -147,21 +147,21 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
 
     // Show AlertDialog to Confirm Removal of All Items from Database Table
     private fun confirmRemoval() {
-        val builder = AlertDialog.Builder(requireContext())
-        builder.setPositiveButton("Yes") { _, _ ->
-            mToDoViewModel.deleteAll()
-            Toast.makeText(
-                requireContext(),
-                "Successfully Removed Everything!",
-                Toast.LENGTH_SHORT
-            ).show()
-        }
-        builder.setNegativeButton("No") { _, _ -> }
-        builder.setTitle("Delete everything?")
-        builder.setMessage("Are you sure you want to remove everything?")
-        builder.create().show()
-    }
+        AlertDialog.Builder(requireContext()).apply {
 
+            setPositiveButton("Yes") { _, _ ->
+                mToDoViewModel.deleteAll()
+                Toast.makeText(
+                    requireContext(),
+                    "Successfully Removed Everything!",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+            setNegativeButton("No") { _, _ -> }
+            setTitle("Delete everything?")
+            setMessage("Are you sure you want to remove everything?")
+        }.create().show()
+    }
 
 
 }

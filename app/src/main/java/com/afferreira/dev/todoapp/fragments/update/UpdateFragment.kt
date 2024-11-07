@@ -88,20 +88,20 @@ class UpdateFragment : Fragment() {
 
     // Show AlertDialog to Confirm Item Removal
     private fun confirmItemRemoval() {
-        val builder = AlertDialog.Builder(requireContext())
-        builder.setPositiveButton("Yes") { _, _ ->
-            mToDoViewModel.deleteItem(args.currentItem)
-            Toast.makeText(
-                requireContext(),
-                "Successfully Removed: ${args.currentItem.title}",
-                Toast.LENGTH_SHORT
-            ).show()
-            findNavController().navigate(R.id.action_updateFragment_to_listFragment)
-        }
-        builder.setNegativeButton("No") { _, _ -> }
-        builder.setTitle("Delete '${args.currentItem.title}'?")
-        builder.setMessage("Are you sure you want to remove '${args.currentItem.title}'?")
-        builder.create().show()
+        AlertDialog.Builder(requireContext()).apply {
+            setPositiveButton("Yes") { _, _ ->
+                mToDoViewModel.deleteItem(args.currentItem)
+                Toast.makeText(
+                    requireContext(),
+                    "Successfully Removed: ${args.currentItem.title}",
+                    Toast.LENGTH_SHORT
+                ).show()
+                findNavController().navigate(R.id.action_updateFragment_to_listFragment)
+            }
+            setNegativeButton("No") { _, _ -> }
+            setTitle("Delete '${args.currentItem.title}'?")
+            setMessage("Are you sure you want to remove '${args.currentItem.title}'?")
+        }.create().show()
     }
 
     override fun onDestroyView() {
