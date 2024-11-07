@@ -15,7 +15,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class BindingAdapters {
 
-    companion object{
+    companion object {
 
         @BindingAdapter("android:navigateToAddFragment")
         @JvmStatic

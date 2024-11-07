@@ -16,8 +16,7 @@ import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
-import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.afferreira.dev.todoapp.R
 import com.afferreira.dev.todoapp.data.viewmodel.ToDoViewModel
 import com.afferreira.dev.todoapp.databinding.FragmentListBinding
@@ -39,6 +38,8 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         // Inflate the layout for this fragment
         _binding = FragmentListBinding.inflate(inflater, container, false)
+        binding.lifecycleOwner = this
+        binding.mSharedViewModel = mSharedViewModel
 
         // Setup RecyclerView
         setupRecyclerview()
@@ -55,11 +56,6 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.apply {
-            floatingActionButton.setOnClickListener {
-                findNavController().navigate(R.id.action_listFragment_to_addFragment)
-            }
-        }
         val menuHost: MenuHost = requireActivity()
         menuHost.addMenuProvider(object : MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
@@ -88,7 +84,7 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
     private fun setupRecyclerview() {
         val recyclerView = binding.recyclerView
         recyclerView.adapter = adapter
-        recyclerView.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL) //LinearLayoutManager(requireContext())
+        recyclerView.layoutManager = LinearLayoutManager(requireContext()) // StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
 
         // Swipe to Delete
 //        swipeToDelete(recyclerView)
@@ -161,6 +157,11 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
             setTitle("Delete everything?")
             setMessage("Are you sure you want to remove everything?")
         }.create().show()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 

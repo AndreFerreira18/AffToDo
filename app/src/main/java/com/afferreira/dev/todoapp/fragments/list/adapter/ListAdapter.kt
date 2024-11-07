@@ -18,26 +18,18 @@ class ListAdapter : RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
         fun bind(toDoData: ToDoData){
             binding.toDoData = toDoData
             binding.executePendingBindings()
-            binding.rowBackground.setOnClickListener {
-                val action = ListFragmentDirections.actionListFragmentToUpdateFragment(toDoData)
-                binding.rowBackground.findNavController().navigate(action)
-            }
         }
         companion object{
             fun from(parent: ViewGroup): MyViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = RowLayoutBinding.inflate(layoutInflater, parent, false)
-                return MyViewHolder(
-                    binding
-                )
+                return MyViewHolder(binding)
             }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        return MyViewHolder.from(
-            parent
-        )
+        return MyViewHolder.from(parent)
     }
 
     override fun getItemCount(): Int =  dataList.size
