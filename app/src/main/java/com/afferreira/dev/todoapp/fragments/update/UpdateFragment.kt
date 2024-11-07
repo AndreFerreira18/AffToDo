@@ -108,5 +108,4 @@ class UpdateFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-
 }

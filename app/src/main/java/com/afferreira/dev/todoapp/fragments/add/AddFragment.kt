@@ -44,10 +44,10 @@ class AddFragment : Fragment() {
             }
 
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-                if (menuItem.itemId == R.id.menu_add) {
-                    insertDataToDb()
-                } else if (menuItem.itemId == android.R.id.home) {
-                    requireActivity().onBackPressedDispatcher.onBackPressed()
+                when (menuItem.itemId) {
+                    R.id.menu_add -> insertDataToDb()
+                    android.R.id.home ->
+                        requireActivity().onBackPressedDispatcher.onBackPressed()
                 }
                 return true
             }
