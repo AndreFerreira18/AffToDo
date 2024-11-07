@@ -19,10 +19,6 @@
                     android:title="@string/priority_high" />
 
                 <item
-                    android:id="@+id/menu_priority_medium"
-                    android:title="@string/priority_medium" />
-
-                <item
                     android:id="@+id/menu_priority_low"
                     android:title="@string/priority_low" />
             </menu>
